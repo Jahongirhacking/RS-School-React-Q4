@@ -1,0 +1,53 @@
+@import '../../styles/colors.scss';
+
+.aside {
+  align-items: center;
+  background-color: $dark-color;
+  box-shadow: -3px 5px 14px black;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: calc(100% - 85px);
+  justify-content: center;
+  margin-top: 84px;
+  max-width: 300px;
+  min-width: 200px;
+  padding: 0 10px;
+  position: fixed;
+  right: 0%;
+  top: 0%;
+
+  @media screen and (max-width: 495px) {
+    margin-top: 133px;
+    height: calc(100% - 133px);
+  }
+
+  @media screen and (max-width: 340px) {
+    margin-top: 166px;
+    height: calc(100% - 166px);
+  }
+
+  img {
+    width: 115px;
+    filter: drop-shadow(5px 5px 5px black);
+    transition: filter 0.4s ease;
+  }
+
+  img:hover {
+    filter: drop-shadow(5px 5px 10px black);
+  }
+
+  .aside__info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .aside__close-btn {
+    background-color: $danger;
+    color: $white;
+    margin-top: 8px;
+  }
+}

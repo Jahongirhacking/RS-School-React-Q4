@@ -1,0 +1,40 @@
+@import '../../styles/colors.scss';
+
+.main {
+  width: 100%;
+  height: calc(100vh - 85px);
+  padding: 50px 0;
+  position: relative;
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 15px;
+
+    .status-info {
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      font-size: 16pt;
+      padding: 10px 15px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      &.fetching {
+        color: $success;
+        font-size: 18pt;
+      }
+
+      &.error {
+        color: $danger;
+      }
+    }
+  }
+}

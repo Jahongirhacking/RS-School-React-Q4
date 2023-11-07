@@ -1,0 +1,17 @@
+@import '../../styles/colors.scss';
+
+.home-page-layout {
+  background-color: $secondary-color;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 100vh;
+  max-height: 100vh;
+  padding-bottom: 10px;
+
+  .main-container {
+    position: relative;
+    max-width: 100%;
+    overflow-y: auto;
+  }
+}
