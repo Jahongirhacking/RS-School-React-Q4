@@ -1,8 +1,14 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+// Routing
+import { Outlet, useSearchParams } from 'react-router-dom';
+// Styles
+import "./style.scss";
+// Pages
 import Header from "../../pages/Header"
 import Main from "../../pages/Main"
-import { Outlet, useSearchParams } from 'react-router-dom';
-import "./style.scss";
+import Footer from '../../pages/Footer';
+// API
+import { LIMIT } from '../../services/api';
 
 const HomePageLayout = () => {
     // States
@@ -14,7 +20,8 @@ const HomePageLayout = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     useEffect(() => {
         setSearchParams((param) => {
-            param.set("page", localStorage.getItem("pageNumber") || "0");
+            param.get("page") || param.set("page", localStorage.getItem("pageNumber") || "0");
+            param.get("limit") || param.set("limit", localStorage.getItem("limitNumber") || `${LIMIT}`)
             return param;
         });
         setSearchedKey(localStorage.getItem("searchedKey") || "");
@@ -31,13 +38,20 @@ const HomePageLayout = () => {
         localStorage.setItem('pageNumber', searchParams.get("page") || "0");
     }, [searchParams]);
 
+    const handleLimitNumber = useCallback((): void => {
+        setSearchedKey("");
+        localStorage.setItem('limitNumber', searchParams.get("limit") || `${LIMIT}`);
+    }, [searchParams]);
 
-    useMemo(() => {
+
+    useEffect(() => {
         // Map page number
         handlePageNumber();
+        // Map limit number
+        handleLimitNumber();
         // Map searched name
         handleSearchedKey(localStorage.getItem("searchedKey") || "");
-    }, [handlePageNumber, handleSearchedKey])
+    }, [handlePageNumber, handleLimitNumber, handleSearchedKey])
 
     return (
         <section className='home-page-layout'>
@@ -57,6 +71,7 @@ const HomePageLayout = () => {
                 />
                 <Outlet />
             </section>
+            <Footer />
         </section>
     );
 }

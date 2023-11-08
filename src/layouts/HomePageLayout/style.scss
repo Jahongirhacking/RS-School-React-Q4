@@ -7,11 +7,12 @@
   gap: 5px;
   height: 100vh;
   max-height: 100vh;
-  padding-bottom: 10px;
+  padding-bottom: 3px;
+  overflow-x: hidden;
 
   .main-container {
     position: relative;
-    max-width: 100%;
+    max-height: calc(100% - 20px);
     overflow-y: auto;
   }
 }
