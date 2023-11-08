@@ -4,7 +4,7 @@ import { IProperties } from './interface';
 const BASE_URL = 'https://pokeapi.co/api/v2';
 const IMAGE_URL = 'https://img.pokemondb.net/artwork/large';
 const DETAIL_URL = 'https://pokeapi.co/api/v2/pokemon-form';
-const LIMIT = 90;
+export const LIMIT = 90;
 
 export const fetchData = async (
   path: string,
@@ -43,10 +43,11 @@ export const fetchProperties = async (
 
 export const fetchLimitedPokemons = async (
   offset: number,
+  limit: number,
   setIsError: (value: boolean) => void
 ): Promise<LimitedPokemons> => {
   const { results } = await fetchData(
-    `${BASE_URL}/pokemon?limit=${LIMIT}&offset=${offset * LIMIT}`,
+    `${BASE_URL}/pokemon?limit=${limit}&offset=${offset * limit}`,
     setIsError
   );
   const pokemons = await Promise.all(
