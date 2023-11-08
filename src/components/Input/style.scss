@@ -18,6 +18,10 @@
     &:focus {
       outline: none;
     }
+
+    &.input-limit {
+      width: 70px;
+    }
   }
 
   button {

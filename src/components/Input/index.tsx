@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import Button from '../Button';
-// FontAwesome Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 // Types
 import InputProps from './interface';
 // Styles
 import './style.scss';
 
-const Input = (props: InputProps) => {
+const Input = ({
+  setSearchedKey,
+  searchedKey,
+  placeholder,
+  type,
+  className,
+  btnContent
+}: InputProps) => {
   const [inputValue, setInputValue] = useState<string>('');
-  const { setSearchedKey, searchedKey, placeholder } = props;
 
   useEffect(() => {
     setInputValue(searchedKey);
@@ -19,7 +22,8 @@ const Input = (props: InputProps) => {
   return (
     <form className="input-container" onSubmit={(e) => { e.preventDefault() }}>
       <input
-        type="text"
+        className={className}
+        type={type}
         value={inputValue}
         onChange={(e) => { setInputValue(e.currentTarget.value) }}
         placeholder={placeholder || 'Type something...'}
@@ -29,7 +33,7 @@ const Input = (props: InputProps) => {
         setSearchedKey(inputValue);
         setInputValue("");
       }}>
-        <FontAwesomeIcon icon={faSearch} />
+        {btnContent}
       </Button>
 
       {inputValue !== inputValue.trim() && (
