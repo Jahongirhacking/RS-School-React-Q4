@@ -1,7 +1,9 @@
+// Hooks
 import { useState, useCallback, useEffect } from 'react';
+// Components
 import Card from '../../components/Card';
 // API
-import { fetchLimitedPokemons } from '../../services/api';
+import { LIMIT, fetchLimitedPokemons } from '../../services/api';
 // FontAwesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -14,11 +16,12 @@ import './style.scss';
 import { useSearchParams } from 'react-router-dom';
 
 const Main = ({ setIsError, setIsPending, searchedKey, isError, isPending }: MainProp) => {
-
+  // List of Pokemons which will be updated
   const [pokemonsList, setPokemonsList] = useState<IPokemonLocal[]>([]);
-
+  // Search Parameters
   const [searchParams] = useSearchParams();
   const pageNumber = Number(searchParams.get("page")) || 0;
+  const LimitNumber = Number(searchParams.get("limit")) || LIMIT;
 
   /**
    * TODO: request to get new pokemons
@@ -31,6 +34,7 @@ const Main = ({ setIsError, setIsPending, searchedKey, isError, isPending }: Mai
           setIsPending(true);
           const { pokemons } = await fetchLimitedPokemons(
             pageNumber,
+            LimitNumber,
             setIsError
           );
           setPokemonsList(pokemons);
@@ -43,13 +47,17 @@ const Main = ({ setIsError, setIsPending, searchedKey, isError, isPending }: Mai
 
       fetchPokemons();
     },
-    [pageNumber, setIsError, setIsPending]
+    [pageNumber, LimitNumber, setIsError, setIsPending]
   );
 
+  // if something is changed with handleFetchPokemons
+  // call it again
   useEffect(() => {
     handleFetchPokemons();
   }, [handleFetchPokemons])
 
+  // filter if it has not trailing spaces
+  // and match with searchedKey
   const handleFilter = (pokemon: IPokemonLocal) => {
     return (
       searchedKey === searchedKey.trim() &&
@@ -59,6 +67,7 @@ const Main = ({ setIsError, setIsPending, searchedKey, isError, isPending }: Mai
     );
   };
 
+  // Filtered Cards
   const Cards = pokemonsList
     .filter(handleFilter)
     .map((pokemon: IPokemonLocal) => (
@@ -85,7 +94,7 @@ const Main = ({ setIsError, setIsPending, searchedKey, isError, isPending }: Mai
           </div>
         ) : Cards.length === 0 ? (
           // If Cards is empty
-          <div style={{ marginTop: '50px' }}>Nothing found for now...</div>
+          <div style={{ marginTop: '50px' }}>🤷🏻‍♂️ Nothing found for now...</div>
         ) : (
           Cards
         )}
