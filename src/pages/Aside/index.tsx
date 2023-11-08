@@ -2,13 +2,16 @@ import { Link, useLoaderData, useNavigation, useParams, useSearchParams } from "
 import { LoaderFunction } from "react-router-dom";
 // Types
 import { IProperties } from "../../services/interface";
-import { Routes as RoutePaths } from "../../routes";
 // Styles
 import "./style.scss";
 // API
 import { fetchProperties } from "../../services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+// Images
+import unknownImage from "../../assets/unknown.png";
+import { handleImageError } from "../../services/imageError";
+import { getCardsParam } from "../../services/searchParam";
 
 const Aside = () => {
     const { id } = useParams();
@@ -16,11 +19,17 @@ const Aside = () => {
     const details = useLoaderData() as IProperties;
     const { state } = useNavigation();
 
+    const linkTo = getCardsParam(searchParams);
+
     const PokemonDetails = state === "loading"
         ? <FontAwesomeIcon icon={faSpinner} spin size="2x" />
         : (
             <>
-                <img src={details.sprite} alt={details.name} />
+                <img
+                    src={details.sprite}
+                    alt={details.name}
+                    onError={(e) => { handleImageError(e, unknownImage) }}
+                />
                 <div className="aside__info">
                     <h3>Name: <span>{details.name}</span></h3>
                     <p>ID: {id}</p>
@@ -30,7 +39,7 @@ const Aside = () => {
                 </div>
                 <Link
                     className="aside__close-btn btn"
-                    to={`${RoutePaths.HOME}?page=${searchParams.get('page')}`}>
+                    to={linkTo}>
                     Close
                 </Link>
 
