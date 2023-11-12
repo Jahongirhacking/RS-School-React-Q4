@@ -20,7 +20,7 @@ const Input = ({
   }, [searchedKey])
 
   return (
-    <form className="input-container" onSubmit={(e) => { e.preventDefault() }}>
+    <section className="input-container" onSubmit={(e) => { e.preventDefault() }}>
       <input
         className={className}
         type={type}
@@ -39,7 +39,7 @@ const Input = ({
       {inputValue !== inputValue.trim() && (
         <small className="input-error">Incorrect Input Value</small>
       )}
-    </form>
+    </section>
   );
 }
 
