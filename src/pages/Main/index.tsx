@@ -1,5 +1,5 @@
 // Hooks
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 // Components
 import Card from '../../components/Card';
 // API
@@ -8,16 +8,19 @@ import { LIMIT, fetchLimitedPokemons } from '../../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 // Types
-import { IPokemonLocal } from '../../components/Card/interface';
-import { MainProp } from './interface';
+import { IPokemonLocal } from '../../@types/card';
+import { ISearchContext } from '../../@types/app';
 // Styles
 import './style.scss';
 // Routing
 import { useSearchParams } from 'react-router-dom';
+// Context API
+import { SearchContext } from '../../contexts/SearchContext';
 
-const Main = ({ setIsError, setIsPending, searchedKey, isError, isPending }: MainProp) => {
+const Main = () => {
   // List of Pokemons which will be updated
   const [pokemonsList, setPokemonsList] = useState<IPokemonLocal[]>([]);
+  const { setIsError, setIsPending, searchedKey, isError, isPending } = useContext(SearchContext) as ISearchContext;
   // Search Parameters
   const [searchParams] = useSearchParams();
   const pageNumber = Number(searchParams.get("page")) || 0;

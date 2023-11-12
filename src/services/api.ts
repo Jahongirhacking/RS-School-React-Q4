@@ -1,4 +1,4 @@
-import { IPokemonGlobal, LimitedPokemons } from '../components/Card/interface';
+import { IPokemonGlobal, LimitedPokemons } from '../@types/card';
 import { IProperties } from './interface';
 
 const BASE_URL = 'https://pokeapi.co/api/v2';

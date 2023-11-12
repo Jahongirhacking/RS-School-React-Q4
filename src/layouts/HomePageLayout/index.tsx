@@ -9,6 +9,8 @@ import Main from "../../pages/Main"
 import Footer from '../../pages/Footer';
 // API
 import { LIMIT } from '../../services/api';
+// Context API
+import { SearchContext } from '../../contexts/SearchContext';
 
 const HomePageLayout = () => {
     // States
@@ -55,22 +57,20 @@ const HomePageLayout = () => {
 
     return (
         <section className='home-page-layout'>
-            <Header
-                setSearchedKey={handleSearchedKey}
-                searchedKey={searchedKey}
-                setIsPending={setIsPending}
-                setIsError={setIsError}
-            />
-            <section className='main-container'>
-                <Main
-                    searchedKey={searchedKey}
-                    isPending={isPending}
-                    setIsPending={setIsPending}
-                    isError={isError}
-                    setIsError={setIsError}
-                />
-                <Outlet />
-            </section>
+            <SearchContext.Provider value={{
+                searchedKey,
+                isPending,
+                isError,
+                setIsPending,
+                handleSearchedKey,
+                setIsError
+            }}>
+                <Header />
+                <section className='main-container'>
+                    <Main />
+                    <Outlet />
+                </section>
+            </SearchContext.Provider>
             <Footer />
         </section>
     );

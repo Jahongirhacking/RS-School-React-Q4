@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 // Components
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 // Types
-import HeaderProps from './interface';
+import { ISearchContext } from '../../@types/app';
 // API
 import { LIMIT, fetchData } from '../../services/api';
 // Styles
@@ -12,16 +13,13 @@ import { useSearchParams } from 'react-router-dom';
 // FontAwesome Icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTriangleExclamation, faArrowRight, faArrowLeft, faSearch, faCheck } from '@fortawesome/free-solid-svg-icons';
+// Context API
+import { SearchContext } from '../../contexts/SearchContext';
 
-const Header = (props: HeaderProps) => {
-  const {
-    searchedKey,
-    setSearchedKey,
-    setIsPending,
-    setIsError
-  } = props;
+const Header = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const { searchedKey, handleSearchedKey, setIsPending, setIsError } = useContext(SearchContext) as ISearchContext;
 
   const pageNumber = Number(searchParams.get("page")) || 0;
   const limitNumber = Number(searchParams.get("limit")) || LIMIT;
@@ -31,7 +29,7 @@ const Header = (props: HeaderProps) => {
       const page = callbackFunc(Number(param.get("page")) || 0);
       localStorage.setItem("pageNumber", `${page}`);
       param.set("page", `${page}`);
-      setSearchedKey("");
+      handleSearchedKey("");
       return param;
     });
   }
@@ -72,7 +70,7 @@ const Header = (props: HeaderProps) => {
         <Input
           className='input-name'
           searchedKey={searchedKey}
-          setSearchedKey={setSearchedKey}
+          setSearchedKey={handleSearchedKey}
           placeholder={'Pokemon Name...'}
           type={'text'}
           btnContent={<FontAwesomeIcon icon={faSearch} />}

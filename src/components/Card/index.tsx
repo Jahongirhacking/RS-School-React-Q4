@@ -1,7 +1,7 @@
 // Routing
 import { Link, useSearchParams } from 'react-router-dom';
 // Types
-import { IPokemonLocal } from './interface';
+import { IPokemonLocal } from '../../@types/card';
 // Styles
 import './style.scss';
 // Images
