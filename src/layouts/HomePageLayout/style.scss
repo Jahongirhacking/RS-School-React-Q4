@@ -14,5 +14,18 @@
     position: relative;
     max-height: calc(100% - 20px);
     overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: $primary-color;
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $dark-color;
+      border-radius: 4px;
+    }
   }
 }
