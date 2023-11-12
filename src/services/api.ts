@@ -1,5 +1,5 @@
 import { IPokemonGlobal, LimitedPokemons } from '../@types/card';
-import { IProperties } from './interface';
+import { IProperties } from '../@types/service';
 
 const BASE_URL = 'https://pokeapi.co/api/v2';
 const IMAGE_URL = 'https://img.pokemondb.net/artwork/large';
@@ -50,7 +50,7 @@ export const fetchLimitedPokemons = async (
     `${BASE_URL}/pokemon?limit=${limit}&offset=${offset * limit}`,
     setIsError
   );
-  const pokemons = await Promise.all(
+  const pokemonsList = await Promise.all(
     results.map(async (pokemon: IPokemonGlobal) => {
       // TODO: Get all information
       const id = Number.parseInt(pokemon.url.split('/')[6]); // Get ID from url
@@ -63,5 +63,5 @@ export const fetchLimitedPokemons = async (
       return { id, pokemonName, imgUrl, abilities, height };
     })
   );
-  return { pokemons };
+  return { pokemonsList };
 };

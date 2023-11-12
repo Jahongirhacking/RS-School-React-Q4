@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from '../Button';
 // Types
-import InputProps from './interface';
+import InputProps from '../../@types/input';
 // Styles
 import './style.scss';
 

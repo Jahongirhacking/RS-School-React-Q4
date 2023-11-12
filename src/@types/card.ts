@@ -12,5 +12,5 @@ export interface IPokemonGlobal {
 }
 
 export type LimitedPokemons = {
-  pokemons: IPokemonLocal[];
+  pokemonsList: IPokemonLocal[];
 };

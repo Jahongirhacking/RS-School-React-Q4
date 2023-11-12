@@ -2,7 +2,7 @@
 import { Link, useLoaderData, useNavigation, useParams, useSearchParams } from "react-router-dom";
 import { LoaderFunction } from "react-router-dom";
 // Types
-import { IProperties } from "../../services/interface";
+import { IProperties } from "../../@types/service";
 // Styles
 import "./style.scss";
 // API

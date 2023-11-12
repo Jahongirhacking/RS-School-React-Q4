@@ -9,17 +9,60 @@ import Main from "../../pages/Main"
 import Footer from '../../pages/Footer';
 // API
 import { LIMIT } from '../../services/api';
+import { fetchLimitedPokemons } from '../../services/api';
+// Types
+import { IPokemonLocal } from '../../@types/card';
 // Context API
 import { SearchContext } from '../../contexts/SearchContext';
+import { PokemonsContext } from '../../contexts/PokemonsContext';
+
 
 const HomePageLayout = () => {
+    // Search Parameters
+    const [searchParams, setSearchParams] = useSearchParams();
     // States
     const [searchedKey, setSearchedKey] = useState<string>('');
     const [isPending, setIsPending] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
+    const [pokemonsList, setPokemonsList] = useState<IPokemonLocal[]>([]);
 
-    // Search Parameters
-    const [searchParams, setSearchParams] = useSearchParams();
+    const pageNumber = Number(searchParams.get("page")) || 0;
+    const limitNumber = Number(searchParams.get("limit")) || LIMIT;
+
+    /**
+     * TODO: request to get new pokemons
+     */
+    const handleFetchPokemons = useCallback(
+        () => {
+            const fetchPokemons = async () => {
+                try {
+                    setIsError(false);
+                    setIsPending(true);
+                    const { pokemonsList } = await fetchLimitedPokemons(
+                        pageNumber,
+                        limitNumber,
+                        setIsError
+                    );
+                    setPokemonsList(pokemonsList);
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    setIsPending(false);
+                }
+            };
+
+            fetchPokemons();
+        },
+        [pageNumber, limitNumber, setIsError, setIsPending]
+    );
+
+    // if something is changed with handleFetchPokemons
+    // call it again
+    useEffect(() => {
+        handleFetchPokemons();
+    }, [handleFetchPokemons])
+
+
     useEffect(() => {
         setSearchParams((param) => {
             param.get("page") || param.set("page", localStorage.getItem("pageNumber") || "0");
@@ -67,7 +110,9 @@ const HomePageLayout = () => {
             }}>
                 <Header />
                 <section className='main-container'>
-                    <Main />
+                    <PokemonsContext.Provider value={{ pokemonsList }}>
+                        <Main />
+                    </PokemonsContext.Provider>
                     <Outlet />
                 </section>
             </SearchContext.Provider>

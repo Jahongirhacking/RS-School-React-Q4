@@ -1,63 +1,23 @@
 // Hooks
-import { useState, useCallback, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 // Components
 import Card from '../../components/Card';
-// API
-import { LIMIT, fetchLimitedPokemons } from '../../services/api';
 // FontAwesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 // Types
-import { IPokemonLocal } from '../../@types/card';
+import { IPokemonLocal, LimitedPokemons } from '../../@types/card';
 import { ISearchContext } from '../../@types/app';
 // Styles
 import './style.scss';
-// Routing
-import { useSearchParams } from 'react-router-dom';
 // Context API
 import { SearchContext } from '../../contexts/SearchContext';
+import { PokemonsContext } from '../../contexts/PokemonsContext';
 
 const Main = () => {
   // List of Pokemons which will be updated
-  const [pokemonsList, setPokemonsList] = useState<IPokemonLocal[]>([]);
-  const { setIsError, setIsPending, searchedKey, isError, isPending } = useContext(SearchContext) as ISearchContext;
-  // Search Parameters
-  const [searchParams] = useSearchParams();
-  const pageNumber = Number(searchParams.get("page")) || 0;
-  const LimitNumber = Number(searchParams.get("limit")) || LIMIT;
-
-  /**
-   * TODO: request to get new pokemons
-   */
-  const handleFetchPokemons = useCallback(
-    () => {
-      const fetchPokemons = async () => {
-        try {
-          setIsError(false);
-          setIsPending(true);
-          const { pokemons } = await fetchLimitedPokemons(
-            pageNumber,
-            LimitNumber,
-            setIsError
-          );
-          setPokemonsList(pokemons);
-        } catch (err) {
-          console.error(err);
-        } finally {
-          setIsPending(false);
-        }
-      };
-
-      fetchPokemons();
-    },
-    [pageNumber, LimitNumber, setIsError, setIsPending]
-  );
-
-  // if something is changed with handleFetchPokemons
-  // call it again
-  useEffect(() => {
-    handleFetchPokemons();
-  }, [handleFetchPokemons])
+  const { searchedKey, isError, isPending } = useContext(SearchContext) as ISearchContext;
+  const { pokemonsList } = useContext(PokemonsContext) as LimitedPokemons;
 
   // filter if it has not trailing spaces
   // and match with searchedKey

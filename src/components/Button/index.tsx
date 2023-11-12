@@ -1,4 +1,4 @@
-import ButtonProps from './interface';
+import ButtonProps from '../../@types/button';
 import './style.scss';
 
 const Button = (props: ButtonProps) => {
