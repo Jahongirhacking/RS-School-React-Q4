@@ -17,7 +17,7 @@ const Card = (props: IPokemonLocal) => {
   const linkTo = getDetailsParam(id, searchParams)
 
   return (
-    <article className="card">
+    <article className="card" title='pokemon-card'>
       <div className='card__img-container'>
         <img
           src={imgUrl}
