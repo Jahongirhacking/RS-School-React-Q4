@@ -63,7 +63,11 @@ const Aside = () => {
       </>
     );
 
-  return <aside className="aside">{PokemonDetails}</aside>;
+  return (
+    <aside className="aside" role="banner">
+      {PokemonDetails}
+    </aside>
+  );
 };
 
 interface ParamProps {

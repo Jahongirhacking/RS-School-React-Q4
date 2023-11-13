@@ -22,7 +22,10 @@
     "react-router-dom": "6.18"
   },
   "devDependencies": {
+    "@testing-library/dom": "^9.3.3",
+    "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.0",
+    "@testing-library/user-event": "^14.5.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

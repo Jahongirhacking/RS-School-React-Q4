@@ -35,7 +35,7 @@ const Card = (props: IPokemonLocal) => {
         <p className="height">
           Height: <b>{height}</b>
         </p>
-        <Link className="card__btn btn" to={linkTo}>
+        <Link className="card__btn btn" to={linkTo} role="button">
           Details
         </Link>
       </section>
