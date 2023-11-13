@@ -44,17 +44,17 @@ const Aside = () => {
         />
         <div className="aside__info">
           <h3>
-            Name: <span>{details.name}</span>
+            Name: {details.name}
           </h3>
           <p>ID: {id}</p>
           <p>
-            Height: <span>{details.height}</span>
+            Height: {details.height}
           </p>
           <p>
-            Abilities: <span>{details.abilities.join(', ')}</span>
+            Abilities: {details.abilities.join(', ')}
           </p>
           <p>
-            Types: <span>{details.types.join(', ')}</span>
+            Types: {details.types.join(', ')}
           </p>
         </div>
         <Link className="aside__close-btn btn" to={linkTo}>
@@ -79,7 +79,7 @@ export const fetchPropertiesLoader: LoaderFunction<ParamProps> = async ({
   params,
 }): Promise<IProperties> => {
   const { id } = params;
-  const properties = await fetchProperties(Number(id), () => {});
+  const properties = await fetchProperties(Number(id), () => { });
   return properties;
 };
 

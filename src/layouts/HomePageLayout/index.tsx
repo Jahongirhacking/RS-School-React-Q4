@@ -97,7 +97,7 @@ const HomePageLayout = () => {
   }, [handlePageNumber, handleLimitNumber, handleSearchedKey]);
 
   return (
-    <section className="home-page-layout">
+    <section className="home-page-layout" data-testid="homepage">
       <SearchContext.Provider
         value={{
           searchedKey,
