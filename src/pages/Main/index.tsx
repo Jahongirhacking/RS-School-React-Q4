@@ -30,20 +30,6 @@ const Main = () => {
     );
   };
 
-  // Filtered Cards
-  const Cards = pokemonsList
-    .filter(handleFilter)
-    .map((pokemon: IPokemonLocal) => (
-      <Card
-        key={pokemon.id}
-        pokemonName={pokemon.pokemonName}
-        imgUrl={pokemon.imgUrl}
-        abilities={pokemon.abilities}
-        height={pokemon.height}
-        id={pokemon.id}
-      />
-    ));
-
   return (
     <main className="main">
       <section className="card-container">
@@ -55,14 +41,37 @@ const Main = () => {
           <div className="status-info fetching">
             <FontAwesomeIcon icon={faSpinner} spin size="3x" />
           </div>
-        ) : Cards.length === 0 ? (
-          // If Cards is empty
-          <div style={{ marginTop: '50px' }}>🤷🏻‍♂️ Nothing found for now...</div>
         ) : (
-          Cards
+          <Cards pokemonsList={pokemonsList} handleFilter={handleFilter} />
         )}
       </section>
     </main>
+  );
+};
+
+export const Cards = ({
+  pokemonsList,
+  handleFilter,
+}: {
+  pokemonsList: IPokemonLocal[];
+  handleFilter: (value: IPokemonLocal) => boolean;
+}) => {
+  const cards = pokemonsList
+    .filter(handleFilter)
+    .map((pokemon: IPokemonLocal) => (
+      <Card
+        key={pokemon.id}
+        pokemonName={pokemon.pokemonName}
+        imgUrl={pokemon.imgUrl}
+        abilities={pokemon.abilities}
+        height={pokemon.height}
+        id={pokemon.id}
+      />
+    ));
+  return cards.length !== 0 ? (
+    cards
+  ) : (
+    <div style={{ marginTop: '50px' }}>🤷🏻‍♂️ Nothing found for now...</div>
   );
 };
 

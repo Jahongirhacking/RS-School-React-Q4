@@ -1,7 +1,8 @@
 import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
-import Card from '../components/Card';
+import { Cards } from '../pages/Main';
 import { BrowserRouter } from 'react-router-dom';
+import { IPokemonLocal } from '../@types/card';
 
 const mockData = [
   {
@@ -20,27 +21,24 @@ const mockData = [
   },
 ];
 
-const Cards = () => {
+const PokemonCards = ({ data }: { data: IPokemonLocal[] }) => {
   return (
     <BrowserRouter>
-      {mockData.map((data) => (
-        <Card
-          key={data.id}
-          pokemonName={data.pokemonName}
-          imgUrl={data.imgUrl}
-          abilities={data.abilities}
-          height={data.height}
-          id={data.id}
-        />
-      ))}
+      <Cards pokemonsList={data} handleFilter={() => true} />
     </BrowserRouter>
   );
 };
 
 describe('Cards List', () => {
-  test('should have exact number', async () => {
-    render(<Cards />);
+  test('should have exact number of lists', async () => {
+    render(<PokemonCards data={mockData} />);
     const cards = screen.getAllByTitle(/pokemon-card/i);
     expect(cards.length).toBe(mockData.length);
+  });
+
+  test('should warn about empty list', async () => {
+    render(<PokemonCards data={[]} />);
+    const warningElement = screen.getByText(/nothing found for now/i);
+    expect(warningElement).toBeTruthy();
   });
 });
