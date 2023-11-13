@@ -11,28 +11,37 @@ const Input = ({
   placeholder,
   type,
   className,
-  btnContent
+  btnContent,
 }: InputProps) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   useEffect(() => {
     setInputValue(searchedKey);
-  }, [searchedKey])
+  }, [searchedKey]);
 
   return (
-    <section className="input-container" onSubmit={(e) => { e.preventDefault() }}>
+    <section
+      className="input-container"
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <input
         className={className}
         type={type}
         value={inputValue}
-        onChange={(e) => { setInputValue(e.currentTarget.value) }}
+        onChange={(e) => {
+          setInputValue(e.currentTarget.value);
+        }}
         placeholder={placeholder || 'Type something...'}
       />
 
-      <Button handleClick={() => {
-        setSearchedKey(inputValue);
-        setInputValue("");
-      }}>
+      <Button
+        handleClick={() => {
+          setSearchedKey(inputValue);
+          setInputValue('');
+        }}
+      >
         {btnContent}
       </Button>
 
@@ -41,6 +50,6 @@ const Input = ({
       )}
     </section>
   );
-}
+};
 
 export default Input;
