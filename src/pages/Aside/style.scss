@@ -2,13 +2,13 @@
 
 .aside {
   align-items: center;
-  background-color: $dark-color;
+  background-color: $dark-blue;
   box-shadow: -3px 5px 14px black;
   color: $white;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: calc(100% - 100px - 25px);
+  height: calc(100dvh - 100px - 25px);
   justify-content: center;
   margin-top: 100px;
   max-width: 300px;
@@ -17,20 +17,21 @@
   position: fixed;
   right: 0;
   top: 0;
+  border: 2px dashed $success;
 
   @media screen and (max-width: 810px) {
     margin-top: 149px;
-    height: calc(100% - 149px - 25px);
+    height: calc(100dvh - 149px - 25px);
   }
 
   @media screen and (max-width: 500px) {
     margin-top: 128px;
-    height: calc(100% - 128px - 25px);
+    height: calc(100dvh - 128px - 25px);
   }
 
   @media screen and (max-width: 257px) {
     margin-top: 114px;
-    height: calc(100% - 114px - 38px);
+    height: calc(100dvh - 114px - 39px);
   }
 
   img {
@@ -54,5 +55,6 @@
     background-color: $danger;
     color: $white;
     margin-top: 8px;
+    border: 1px solid $white;
   }
 }

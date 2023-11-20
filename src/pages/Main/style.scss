@@ -2,17 +2,17 @@
 
 .main {
   width: 100%;
-  height: calc(100vh - 127px);
+  height: calc(100dvh - 127px);
   padding: 30px 3px;
   position: relative;
   overflow-y: auto;
 
   @media (max-width: 810px) {
-    height: calc(100vh - 175px);
+    height: calc(100dvh - 175px);
   }
 
   @media (max-width: 500px) {
-    height: calc(100vh - 154px);
+    height: calc(100dvh - 154px);
   }
 
   &::-webkit-scrollbar {
