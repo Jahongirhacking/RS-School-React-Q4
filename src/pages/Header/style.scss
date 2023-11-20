@@ -1,9 +1,27 @@
 @import '../../styles/colors.scss';
 
 .header {
+  max-height: 155px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $dark-blue;
+    border-radius: 2px;
+    border: 2px dashed $white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $white;
+    border-radius: 2px;
+  }
+
   nav {
     align-items: center;
-    background-color: $dark-color;
+    background-color: $dark-blue;
     display: flex;
     font-size: 14pt;
     justify-content: space-between;
@@ -36,7 +54,7 @@
       justify-content: center;
 
       .toggle-btn {
-        background-color: gray;
+        background-color: #2b2b2b;
       }
 
       .btn-container {

@@ -2,9 +2,32 @@
 
 .main {
   width: 100%;
-  height: calc(100vh - 85px);
-  padding: 50px 0;
+  height: calc(100vh - 127px);
+  padding: 30px 0;
   position: relative;
+  overflow-y: auto;
+
+  @media (max-width: 810px) {
+    height: calc(100vh - 175px);
+  }
+
+  @media (max-width: 500px) {
+    height: calc(100vh - 154px);
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $secondary-color;
+    border-radius: 2px;
+    border: 2px dashed $dark-blue;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $dark-blue;
+    border-radius: 2px;
+  }
 
   .card-container {
     display: flex;
@@ -12,6 +35,7 @@
     align-items: center;
     justify-content: space-evenly;
     gap: 15px;
+    padding-bottom: 30px;
 
     .status-info {
       align-items: center;

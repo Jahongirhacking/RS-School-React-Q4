@@ -3,7 +3,7 @@ import './style.scss';
 const Footer = () => {
   return (
     <footer className="footer">
-      &copy;Bulalar Team - Jahongir Hayitov 2023
+      &copy;Bulalar Team - Jahongir Hayitov - Nov 21, 2023
     </footer>
   );
 };

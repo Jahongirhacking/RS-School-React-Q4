@@ -4,7 +4,7 @@ import { IProperties } from '../@types/service';
 const BASE_URL = 'https://pokeapi.co/api/v2';
 const IMAGE_URL = 'https://img.pokemondb.net/artwork/large';
 const DETAIL_URL = 'https://pokeapi.co/api/v2/pokemon-form';
-export const LIMIT = 90;
+export const LIMIT = 27;
 
 export const fetchData = async (
   path: string,

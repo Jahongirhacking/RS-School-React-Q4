@@ -2,8 +2,6 @@
 
 .card {
   align-items: center;
-  background-color: $primary-color;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -11,6 +9,13 @@
   transition: 0.4s ease;
   width: calc(32% - 30px);
   cursor: pointer;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px #ebebeb;
+  background: #00ffa0;
+  border-radius: 1rem;
+  border: 0.5vmin solid $dark-blue;
+  box-shadow: 0.4rem 0.4rem $dark-blue;
+  color: black;
 
   @media screen and (max-width: 700px) {
     gap: 5px;
@@ -61,9 +66,10 @@
     }
 
     .card__btn {
-      background-color: $blue;
+      background-color: $dark-blue;
       color: $white;
       margin-top: 5px;
+      font-size: 1.2rem;
     }
   }
 }
