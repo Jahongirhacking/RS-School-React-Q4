@@ -1,0 +1,60 @@
+@import '../../styles/colors.scss';
+
+.aside {
+  align-items: center;
+  background-color: $dark-blue;
+  box-shadow: -3px 5px 14px black;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: calc(100dvh - 100px - 25px);
+  justify-content: center;
+  margin-top: 100px;
+  max-width: 300px;
+  min-width: 200px;
+  padding: 0 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  border: 2px dashed $success;
+
+  @media screen and (max-width: 810px) {
+    margin-top: 149px;
+    height: calc(100dvh - 149px - 25px);
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-top: 128px;
+    height: calc(100dvh - 128px - 25px);
+  }
+
+  @media screen and (max-width: 257px) {
+    margin-top: 114px;
+    height: calc(100dvh - 114px - 39px);
+  }
+
+  img {
+    width: 130px;
+    filter: drop-shadow(5px 5px 5px black);
+    transition: filter 0.4s ease;
+  }
+
+  img:hover {
+    filter: drop-shadow(5px 5px 10px black);
+  }
+
+  .aside__info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .aside__close-btn {
+    background-color: $danger;
+    color: $white;
+    margin-top: 8px;
+    border: 1px solid $white;
+  }
+}

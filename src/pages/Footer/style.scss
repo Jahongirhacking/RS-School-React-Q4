@@ -1,0 +1,18 @@
+@import '../../styles/colors.scss';
+
+.footer {
+  font-size: 9pt;
+  background-color: $dark-blue;
+  color: $white;
+  text-align: center;
+  padding: 5px 0;
+
+  a.portfolio {
+    color: $success;
+    text-decoration: underline;
+
+    &:visited {
+      color: $white;
+    }
+  }
+}

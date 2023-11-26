@@ -1,0 +1,64 @@
+@import '../../styles/colors.scss';
+
+.main {
+  width: 100%;
+  height: calc(100dvh - 127px);
+  padding: 30px 3px;
+  position: relative;
+  overflow-y: auto;
+
+  @media (max-width: 810px) {
+    height: calc(100dvh - 175px);
+  }
+
+  @media (max-width: 500px) {
+    height: calc(100dvh - 154px);
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $secondary-color;
+    border-radius: 2px;
+    border: 2px dashed $dark-blue;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $dark-blue;
+    border-radius: 2px;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 15px;
+    padding-bottom: 30px;
+
+    .status-info {
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      font-size: 16pt;
+      padding: 10px 15px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      &.fetching {
+        color: $success;
+        font-size: 18pt;
+      }
+
+      &.error {
+        color: $danger;
+      }
+    }
+  }
+}
